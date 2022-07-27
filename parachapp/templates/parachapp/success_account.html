@@ -1,0 +1,17 @@
+{% extends 'admin_template/adminbase.html' %}
+{% load materializecss %}
+{% load static %}
+
+
+{% block content %}
+<main class="">
+    <h1>login successfull, proceed to account</h1>
+
+    {% for student in student %}
+        {% if request.user.is_superuser or user.id == student.user.id %}
+        <a href="{% url 'parachapp:student_details' student.pk %}">proceed to update your profile</a>
+        {% endif %}
+    {%endfor%}
+    
+<main>
+{% endblock content %}

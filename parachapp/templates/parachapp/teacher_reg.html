@@ -1,0 +1,54 @@
+{% load materializecss %}
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="{% static 'css/materialize.min.css' %}"  media="screen,projection"/>
+    <link rel="stylesheet" href="{% static 'css/customcss.css' %}">
+
+    <title>parach app</title>
+    <section class="regcover">
+        
+        <div class="container">
+            <div class="row">
+                <div class="col m4 s12 welcome">
+                    <img src="{% static 'img/2.png' %}" alt="" class="anim">
+                </div>
+                <div class="col m8 s12">
+                    <h5 class="">Register teacher</h5>
+                    <form action="" method="POST" >
+                        {% csrf_token %}
+                        <small class="muted"><span>password Hint:</span> must be eight characters | cannot be entirely numeric</small>
+                        {{teacher_reg_form|materializecss}}
+                        
+                          <div class="row">
+                              <div class="col m5 s5">
+                                    <button class="btn waves-effect waves-light" type="submit" name="action">
+                                    <i class="material-icons right">send</i>
+                                    </button>
+                              </div>
+                              <div class="col m7 s7 para ">
+                                    <p>
+                                        Already Have An Account? <a class="" href="{% url 'parachapp:login' %}">Login</a>
+                                    </p>
+                            </div>
+                        </div>
+                    </div>
+                    </form>
+                    
+            </div>
+        </div>
+    </section>
+    <script src="{% static 'js/customjs/jquery.js' %}"></script>
+    <script src="{% static 'js/customjs/js.js' %}"></script>
+    <script src="{% static 'js/loaderjs/loader.js' %}"></script>
+    <script src="{% static 'js/loaderjs/materialize.min.js' %}"></script>
+  </body>
+</html>

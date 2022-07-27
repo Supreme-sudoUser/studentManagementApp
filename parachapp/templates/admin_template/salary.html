@@ -1,0 +1,100 @@
+{% extends 'admin_template/adminbase.html' %}
+{% load static %}
+{% block title %}teacher Home page{% endblock %}
+{% block content %}
+<style>
+  #table-links a{
+    padding-left: 20px;
+    
+  }
+  input:focus{
+    background-color: red;
+  }
+</style>
+<main class="">
+    <section class="allsudents">
+        <div class="row">
+           <div class="col s12 m12">
+             >> manager
+           </div>
+           {% for message in messages %}
+        {% if message %}
+            {{ message }}
+        {% endif %}
+    {% endfor %}
+        </div>
+         <div class="row">
+            <div class="col s8 m8">
+              <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for student.." title="Type in a name" autocomplete="off">
+            </div>
+            <div class="col s4 m4">
+                  
+            </div>
+          </div>
+         
+      <div class="table">
+        <div class="row">
+          <div class="col s12 m12">
+            <table class="" id="myTable">
+              <thead>
+                <tr>
+                    <th>id</th>
+                    <th>Profile picture</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Amount paid</th>
+                    <th>Date Paid</th>
+                    <th>Updated on</th>
+                    <th class="left-align">View | Update | Delete</th>
+                </tr>
+              </thead>
+          {% for salaries in salary %}
+          <tbody>
+                <tr>
+                  <td>#{{salaries.pk}}</td>
+                  <td><img src="{{salaries.teacherinstance.profile_pic.url}}" alt=""></td>
+                  <td >{{salaries.teacherinstance.firstname}}</td>
+                  <td>{{salaries.teacherinstance.lastname}}</td>
+                  <td>{{salaries.amount}}</td>
+                  <td>{{salaries.date_paid}}</td>
+                  <td>{{salaries.updated_on}}</td>
+                  <td id="table-links">
+                      
+                              <a href="{% url 'parachapp:teacher_details' salaries.teacherinstance.pk %}"><i class="material-icons sidenav-icons">remove_red_eye</i></a>
+                              <a href="{% url 'parachapp:update_salary' salaries.pk %}"><i class="material-icons sidenav-icons">edit</i></a>
+                              <a href="{% url 'parachapp:delete_salary' salaries.pk %}"><i class="material-icons sidenav-icons" style="color: red !important;">delete_forever</i></a>
+                         
+                  </td>
+                </tr>
+              </tbody>
+          {% endfor %}
+              
+            </table>
+          </div>
+        </div>
+      </div>
+                
+    </section>
+</main>
+<script>
+  function myFunction() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("myInput");
+
+    filter = input.value.toUpperCase();
+    table = document.getElementById("myTable");
+    tr = table.getElementsByTagName("tr");
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[2];
+      if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }       
+    }
+  }
+  </script>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="{% static 'css/materialize.min.css' %}"  media="screen,projection"/>
+    <link rel="stylesheet" href="{% static 'css/customcss.css' %}">
+
+    <title>parach app</title>
+  </head>
+  <body>
+    <h1>register sudent or teacher</h1>
+
+    {% if user.is_authenticated %}
+        {{user.username}}
+        <a class="nav-link" href="{% url 'parachapp:logout' %}">Logout</a>
+    {% else %}
+        <a href="{% url 'parachapp:reg_student' %}">register student</a> <br>
+        <a href="{% url 'parachapp:reg_teacher' %}">register teacher</a> <br>
+        <p class="text-center">Already have an account? <a href="{% url 'parachapp:login' %}">login</a>.\</p>
+    {% endif %}
+
+
+    <script src="{% static 'js/customjs/jquery.js' %}"></script>
+    <script src="{% static 'js/customjs/js.js' %}"></script>
+    <script src="{% static 'js/loaderjs/loader.js' %}"></script>
+    <script src="{% static 'js/loaderjs/materialize.min.js' %}"></script>
+  </body>
+</html>

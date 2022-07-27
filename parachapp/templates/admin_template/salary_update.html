@@ -1,0 +1,39 @@
+{% extends 'admin_template/adminbase.html' %}
+{% load materializecss%}
+{% load static %}
+{% block title %}Add course{% endblock %}
+{% block content %}
+<style>
+  
+</style>
+<main class="">
+    <h3>Update payments</h3>
+    <div class="row container">
+        <div class="col s12 m12">
+            <form action="" method="POST">
+                {% csrf_token%}
+
+                {{form|materializecss}}
+                <button type="submit" class="waves-effect waves-light btn">Update</button>
+            </form>
+        </div>
+        <div class="col s12 m7">
+        {% for message in messages %}
+        {% if message %}
+         <div class="card horizontal">
+            <div class="card-stacked">
+              <div class="card-content">
+                
+                        {{ message }}
+              </div>
+            </div>
+          </div>
+          {% endif %}
+        {%endfor%}
+          
+        </div>
+       
+    </div>
+</main>
+
+{% endblock content %}

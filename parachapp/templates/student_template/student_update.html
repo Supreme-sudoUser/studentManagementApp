@@ -1,0 +1,39 @@
+{% extends 'admin_template/adminbase.html' %}
+{% load static %}
+{% load materializecss%}
+
+{% block content %}
+
+
+
+<main class="">
+    
+    <section class="profile-page">
+        <br><br>
+      
+        <form action="" method="POST" enctype="multipart/form-data">
+            
+            {% csrf_token %}
+
+            <div class="row">
+                <div class="col m10 s10">
+                    Username: {{s_update_form|materializecss}}
+            
+                    {{sudent_update_form|materializecss}}
+                    
+                 
+                </div>
+                
+            </div>
+            
+
+            <button type="submit" class="waves-effect waves-light btn">Update</button>
+    
+            
+            </form>
+        
+        
+    </section>
+ </main>
+
+{% endblock %}

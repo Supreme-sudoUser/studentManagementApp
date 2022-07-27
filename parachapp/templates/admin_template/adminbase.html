@@ -1,0 +1,85 @@
+
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!--Import Google Icon Font-->
+    
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.3.2/dist/chart.min.js"></script>
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="{% static 'css/materialize.min.css' %}"  media="screen,projection"/>
+    <link rel="stylesheet" href="{% static 'css/customcss.css' %}">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    
+    <title>{% block title %}{% endblock %}</title>
+  </head>
+  <br>
+  <hr>
+  <body>
+       <!-- Dropdown Structure -->
+    <header class="teal ">
+        <ul id="dropdown1" class="dropdown-content ">
+            <li><a class="dropdown-trigger2"></a></li>
+           
+            <li class="divider"></li>
+            <li><a href="{% url 'parachapp:logout' %}"><i class="material-icons sidenav-icons">lock</i>logout</a></li>
+          </ul>
+          <nav>
+            <div class="nav-wrapper"><a href="#" data-target="sidenav-1" class="left sidenav-trigger hide-on-medium-and-up"><i class="material-icons">menu</i></a>
+ 
+          <!--- 
+            <a href="#!" class="brand-logo"><span>PARACH ICT ACCADEMY</span></a>
+          -->
+          
+              <ul class="right hide-on-med-and-down">
+                <li><a href="">{{user.username}}</a></li>
+                <li>---</li>
+                <!-- Dropdown Trigger -->
+                <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">
+                  <i class="material-icons right">arrow_drop_down</i></a></li>
+              </ul>
+            </div>
+          </nav>
+        </header>
+        
+        
+        <!-- LEFT SIDEBAR  -->
+        <ul id="sidenav-1" class="sidenav sidenav-fixed sidenav-icons2">
+            <div class="profile_picture">
+              <img src="{% static 'img/AEA.png' %}" alt="" class="">
+              <p>Automation Engineering Academy <br>(Polytechnic)</p>
+            </div>
+          
+          <li class="left-align"><a href="{% url 'parachapp:dashboard' %}" ><i class="fas fa-th-large"></i>Admin Dashboard</a></li>
+          <li class="left-align"><a href="{% url 'parachapp:teacher_home' %}" ><i class="fas fa-user-graduate"></i> Tutors</a></li>
+          <li class="left-align"><a href="{% url 'parachapp:student_home' %}" ><i class="fas fa-user-friends"></i> Students</a></li>
+            <li class="left-align"><a href="{% url 'parachapp:create_course' %}" ><i class="fas fa-book"></i> Courses</a></li>
+            <li class="left-align"><a href="{% url 'parachapp:notify' %}" ><i class="far fa-bell"></i> Announcements</a></li>
+            <li class="left-align"><a href="{% url 'parachapp:liveclass' %}" ><i class="fas fa-video"></i>Live classrooms</a></li>
+            <li class="left-align"><a href="{% url 'parachapp:salaryhome' %}" ><i class="far fa-credit-card"></i> Payments</a></li>
+            <br>
+            <br>
+            {%if user.is_superuser or user.is_teacher%}
+
+            {%else%}
+            <li class="left-align"><a href="{% url 'parachapp:student_details' request.user.pk %}" ><i class="fas fa-users-cog"></i> Settings</a></li>
+            {%endif%}
+            <li class="left-align"><a href="{% url 'parachapp:logout' %}" ><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+        </ul>    
+    {% block content %}
+   
+    {% endblock %}
+
+
+            
+    <script src="{% static 'js/customjs/jq.js' %}"></script>
+    <script src="{% static 'js/customjs/js.js' %}"></script>
+    <script src="{% static 'js/customjs/materialize.js' %}"></script>
+    <script src="{% static 'js/customjs/materialize.min.js' %}"></script>
+  </body>
+</html>

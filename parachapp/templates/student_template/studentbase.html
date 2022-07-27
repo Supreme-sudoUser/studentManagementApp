@@ -1,0 +1,77 @@
+
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!--Import Google Icon Font-->
+    
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="{% static 'css/materialize.min.css' %}"  media="screen,projection"/>
+    <link rel="stylesheet" href="{% static 'css/customcss.css' %}">
+
+    <title>parach app</title>
+  </head>
+  <br>
+  <hr>
+  <body>
+       <!-- Dropdown Structure -->
+    <header class="teal ">
+        <ul id="dropdown1" class="dropdown-content ">
+            <li><a class="dropdown-trigger2"><img src="{% static 'img/profiler.jpeg' %}" alt="" class=""></a></li>
+            <li><a href="#!"><a href="" ><span style="font-weight: 900;">franklin</span> <br> <span >(course)</span></a></li>
+            <li class="divider"></li>
+            <li><a href="#!"><i class="material-icons sidenav-icons">build</i>settings</a></li>
+            <li><a href="#!"><i class="material-icons sidenav-icons">lock</i>logout</a></li>
+          </ul>
+          <nav>
+            <div class="nav-wrapper">
+            <a href="#" data-target="sidenav-1" class="left sidenav-trigger hide-on-medium-and-up btn-floating pulse" ><i class="material-icons">menu</i></a>  
+          <!--- 
+            <a href="#!" class="brand-logo"><span>PARACH ICT ACCADEMY</span></a>
+          -->
+              <ul class="right hide-on-med-and-down">
+                <li><a href="sass.html">Admin</a></li>
+                <li><a href="badges.html">Components</a></li>
+                <!-- Dropdown Trigger -->
+                <li><a class="dropdown-trigger" href="#!" data-target="dropdown1"><img src={% static '"img/profiler.jpeg' %}" alt="" class=""><i class="material-icons right">arrow_drop_down</i></a></li>
+              </ul>
+            </div>
+          </nav>
+        </header>
+        
+        
+        <!-- LEFT SIDEBAR  -->
+        <ul id="sidenav-1" class="sidenav sidenav-fixed sidenav-icons">
+            <div class="profile_picture">
+                <img src="{% static 'img/parach.png' %}" alt="" class="">
+            </div>
+          
+          <li class="left-align"><a href="{% url 'parachapp:dashboard' %}" ><i class="small material-icons sidenav-icons">dashboard</i> Admin</a></li>
+          <li class="left-align"><a href="" ><i class="small material-icons sidenav-icons">school</i> Tutors</a></li>
+          <li class="left-align"><a href="{% url 'parachapp:student_home' %}" ><i class="small material-icons sidenav-icons">supervisor_account</i> Students</a></li>
+            <li class="left-align"><a href="" ><i class="small material-icons sidenav-icons">supervisor_account</i> Courses</a></li>
+            <li class="left-align"><a href="" ><i class="small material-icons sidenav-icons">notifications</i> Announcements</a></li>
+            <li class="left-align"><a href="{% url 'parachapp:liveclass' %}" ><i class="small material-icons sidenav-icons">add_a_photo</i>Live classrooms</a></li>
+            <li class="left-align"><a href="" ><i class="small material-icons sidenav-icons">credit_card</i> Payments</a></li>
+            <br>
+            <br>
+            <li class="left-align"><a href="" ><i class="small material-icons sidenav-icons">build</i> Settings</a></li>
+            <li class="left-align"><a href="" ><i class="small material-icons sidenav-icons">lock</i> Logout</a></li>
+        </ul>    
+    {% block content %}
+
+    {% endblock %}
+
+    
+    
+    <script src="{% static 'js/customjs/jq.js' %}"></script>
+    <script src="{% static 'js/customjs/js.js' %}"></script>
+    <script src="{% static 'js/loaderjs/loader.js' %}"></script>
+    <script src="{% static 'js/loaderjs/materialize.min.js' %}"></script>
+  </body>
+</html>

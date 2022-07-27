@@ -1,0 +1,387 @@
+{% extends 'admin_template/adminbase.html' %}
+{% load materializecss%}
+{% load static %}
+
+{% block content %}
+<style>
+  .profile-page{
+    background-color: #fffbfb;
+  }
+  .card-design{
+    border-left: 4px solid #009688;
+  }
+  .card-border{
+    border: 1px solid #e3e3e3;
+  }
+  
+  .card-action i{
+    font-size: 15px;
+    color: #009688;
+    
+  }
+  .edit-button i{
+    font-size: 20px;
+    color: #000;
+    text-transform: lowercase;
+    
+  }
+  .design{
+    background-color: #009688!important;
+    color: #fff;
+  }
+  
+  .collapsible-header:focus{
+    background-color:#009688;
+    color: #fff;
+  }
+  .collapsible-header:focus i{
+    background-color:#009688;
+    color: #fff;
+  }
+  
+</style>
+<main class="">
+     <section class="profile-page">
+        <div class="row">
+           <div class="col s12 m12">
+             >> student
+           </div>
+        </div>
+        <div class="row">
+          <div class="col s12 m4">
+            <div class="card">
+              <div class="card-image">
+                <img src="{{student.profile_pic.url}}">
+                <span class="card-title">{{student.firstname}}</span>
+                <a class="btn-floating halfway-fab waves-effect waves-light teal" href="{% url 'parachapp:student_updates' student.pk %}"><i class="large material-icons">edit</i></a>
+                
+              </div>
+    
+              <div class="card-content">
+                <ul class="collapsible">
+                  <li>
+                    <div class="collapsible-header"><i class="far fa-user"></i>Full name</div>
+                    <div class="collapsible-body"><span>{{student.lastname}} {{student.firstname}}</span></div>
+                  </li>
+                  <li>
+                    <div class="collapsible-header"><i class="far fa-user"></i>Gender</div>
+                    <div class="collapsible-body"><span>{{student.gender}}</span></div>
+                  </li>
+                  <li>
+                    <div class="collapsible-header"><i class="far fa-phone"></i>Phone</div>
+                    <div class="collapsible-body"><span>{{student.mobile_phone}}</span></div>
+                  </li>
+                  <li>
+                    <div class="collapsible-header"><i class="far fa-envelope"></i>Email</div>
+                    <div class="collapsible-body"><span>{{student.email}}</span></div>
+                  </li>
+                  <li>
+                    <div class="collapsible-header"><i class="far fa-map-marker-alt"></i>Address</div>
+                    <div class="collapsible-body"><span>{{student.address}}</span></div>
+                  </li>
+              </ul>
+              </div>
+            </div>
+          </div>
+          {%for profile in instanceprofile%}
+          <div class="col m8">
+            <div class="card horizontal card-design">
+              <div class="card-stacked">
+                
+                <div class="card-action profile-info-card">
+                  <div class="row">
+                    <div class="col m5 s12">
+                      <div class="card-action card-border">
+                        <div class="row">
+                          <div class="col m2">
+                            <i class="far fa-book"></i>
+                          </div>
+                          <div class="col m10">
+                            <span>Course name</span>
+                            <h6>{{profile.course}}</h6>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col m5 s12">
+                      <div class="card-action card-border">
+                        <div class="row">
+                          <div class="col m2">
+                            {%if profile.completed_course == False%}
+                              <i class="far fa-times"></i>
+                            {%else%}
+                              <i class="far fa-check"></i>
+                            {%endif%}
+                            
+                          </div>
+                          <div class="col m10">
+                            <span>completed course</span>
+                            
+                            {%if profile.completed_course == False%}
+                              <h6>No</h6>
+                            {%else%}
+                              <h6>yes</h6>
+                            {%endif%}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    {%if user.is_superuser%}
+                      <div class="col m2 edit-button">
+                      <a class="" href="{% url 'parachapp:advanced_updates' student.pk %}"><i class="far fa-edit"> Edit</i></a>
+                    </div>
+                    {%endif%}
+                  </div>
+                  <div class="row">
+                    <div class="col m6 s12">
+                      <div class="card-action card-border">
+                        <div class="row">
+                          <div class="col m2">
+                            <i class="far fa-credit-card"></i>
+                          </div>
+                          <div class="col m10">
+                            <span>Amount paid</span>
+                            <h6>{{profile.amountpaid}} </h6>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col m6 s12 ">
+                      <div class="card-action card-border">
+                        <div class="row ">
+                          <div class="col m2">
+                            {%if profile.payment_status == 'Fully Paid'%}
+                              <i class="far fa-check"></i>
+                            {%else%}
+                              <i class="far fa-times"></i>
+                            {%endif%}
+                          </div>
+                          <div class="col m10 s12">
+                            <span>Payment status</span>
+                            <h6>{{profile.payment_status}} </h6>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+        {%endfor%}
+          <div class="col m8">
+              <div class="card horizontal">
+                <div class="card-stacked">
+                  <div class="card-action profile-info-card design">
+                    Download course and assignment files here (call your tutor if neccessary)
+                  </div>
+                  <div class="card-action ">
+                    <table>
+                      <thead>
+                          <tr>
+                              
+                              <th>Title of file</th>
+                              <th>Tutor</th>
+                             
+                              <th>Date added</th>
+                              <th>Download</th>
+                          </tr>
+                      </thead>
+                      {% for files in uploadfile %}
+                      {% for inst in instanceprofile %}
+                        {% if files.course.name == inst.course.name %}
+                      <tbody>
+                          <tr>
+                              <td>{{files.file_title}}</td>
+                              <td>{{files.teacherinstance.firstname}}</td>
+                              
+                              <td>{{files.uploaded_at}}</td>
+                              <td><a class="" href="{{files.files.url}}" download="{{files.files.url}}"><i class="far fa-file-download"></i> download</a></td>
+                          </tr>
+                      </tbody>
+                      {%endif%}
+                      {%endfor%}
+                      {%endfor%}
+                  </table>
+                  </div>
+                </div>
+              </div>
+          </div>
+          <div class="row ">
+            {%if request.user.is_superuser%}
+            <div class="col m5 s12">
+              <div class="card horizontal">
+                <div class="card-stacked">
+                  <div class="card-action profile-info-card">
+                    Mark Attendance
+                  </div>
+                  <div class="card-action ">
+                    <form action="" method="POST" id="attendance_form">
+                      {% csrf_token %}
+          
+                      {{ form|materializecss }}
+          
+                      <button type="submit" class="waves-effect waves-light btn">submit</button>
+                  </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+            {%else%}
+            <div class="col m5 s12">
+              <div class="card horizontal">
+                <div class="card-stacked">
+                  <div class="card-action profile-info-card">
+                    
+                  </div>
+                 
+                </div>
+              </div>
+            </div>
+            {%endif%}
+            <div class="col m3 s12">
+              <div class="card horizontal">
+                <div class="card-stacked">
+                  <div class="card-action profile-info-card design">
+                    Attendance History
+                  </div>
+                  <div class="card-action ">
+                    <table class="">
+                      <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>status</th>
+                            <th></th>
+                        </tr>
+                      </thead>
+                      <tbody id="autocomplete-input" class="autocomplete">
+                        {%for at in vv %}
+                          <tr>
+                            <td>{{at.date_present}}</td>
+                            <td>present</td>
+                            <td><i class="far fa-check"></i></td>
+                          </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+         <!-------------------------------------
+         <div class="col s12 m8">
+          <div class="row">
+            
+            
+            
+            
+            
+          </div>
+          
+           <div class="col s6 m6">
+              <div class="card horizontal">
+                <div class="card-stacked">
+                  
+                  <div class="card-action profile-info-card">
+                    Course:
+                    <span>{{student.course.name}}</span>
+                  </div>
+                  <div class="card-action">
+                    Duration:<span> {{student.session.session_start}} to {{student.session.session_end}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+          <div class="row">
+          {%if request.user.is_superuser%}
+            <div class="col s6 m6">
+              <form action="" method="POST" id="attendance_form">
+                {% csrf_token %}
+    
+                {{ form|materializecss }}
+    
+                <button class="btn waves-effect waves-light" type="submit" name="action">
+                  <i class="material-icons right">send</i>
+                </button>
+              </form>
+              {% for message in messages %}
+                  {%if messages%}
+                    <div class="card horizontal">
+                      <div class="card-stacked">
+                        <div class="card-action">
+                          
+                            {{message}} <br>
+                          
+                        </div>
+                      </div>
+                    </div>
+                 {%endif%}
+              {%endfor%}
+            </div>
+            {%else%}
+            <div class="col s6 m6">
+              <div class="card horizontal">
+                <div class="card-stacked">
+                  
+                  <div class="card-action profile-info-card">
+                    <i class="material-icons profile-icon">mail</i>
+                    <span>{{student.email}}</span>
+                  </div>
+                  <div class="card-action">
+                    <i class="material-icons profile-icon">local_phone</i><span> {{student.mobile_phone}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {%endif%}
+            <div class="col s6 m6">
+                <table class="">
+                  <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>status</th>
+                        <th></th>
+                    </tr>
+                  </thead>
+                  <tbody id="autocomplete-input" class="autocomplete">
+                    {%for at in vv %}
+                      <tr>
+                        <td>{{at.date_present}}</td>
+                        <td>present</td>
+                        <td><i class="material-icons profile-icon">check</i></td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+            </div>
+          </div>
+          
+           <ul class="collapsible">
+              <li>
+                <div class="collapsible-header"><i class="material-icons">filter_drama</i>First</div>
+                <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+              </li>
+              <li>
+                <div class="collapsible-header"><i class="material-icons">place</i>Second</div>
+                <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+              </li>
+              <li>
+                <div class="collapsible-header"><i class="material-icons">whatshot</i>Third</div>
+                <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+              </li>
+          </ul>
+         </div> 
+      </div>
+      ---------------> 
+    </section>
+      
+ </main>
+
+  
+{% endblock %}

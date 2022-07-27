@@ -1,0 +1,38 @@
+{% extends 'admin_template/adminbase.html' %}
+{% load static %}
+{% load materializecss%}
+{% block content %}
+<main class="">
+    <section class="live-class">
+        <div class="row">
+         <div class="col s12 m12">
+           >> Student
+         </div>
+       </div>
+        <div class="row">
+            
+            <div class="col s5 m5">
+                <div class="image">
+                    
+                </div>
+              </div>
+              <div class="col s7 m7">
+                <h5>send a message to  student</h5>
+
+                    <form action="" method="POST">
+
+                        {% csrf_token %}
+
+                        {{ form|materializecss }}
+
+                        <br><br>
+                        <button type="submit" class="waves-effect waves-light btn">send message</button>
+                    </form>
+              </div>
+        
+        </div>
+  
+      </section>
+ </main>
+ 
+{% endblock %}

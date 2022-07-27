@@ -1,0 +1,18 @@
+{% extends 'admin_template/adminbase.html' %}
+{% load static %}
+{% load materializecss%}
+{% block content %}
+<main class="">
+    <h4>{{student.firstname}}</h4>
+    <div class="container">
+        <form action="" method="POST">
+            {% csrf_token %}
+    
+            {{advanced_update_form}}
+    
+           
+            <button type="submit" class="waves-effect waves-light btn">Update</button>
+        </form>
+    </div>
+</main>
+{% endblock content %}

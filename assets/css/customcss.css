@@ -1,0 +1,157 @@
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: helvetica;
+    
+}
+
+:root {
+    --main-color: #3335d1;
+    --second-color:#009688;
+
+  }
+header, main, footer {
+	padding-left: 300px;
+}
+.nav-wrapper{
+    background-color:#fff;
+    
+}
+.nav-wrapper a{
+    
+    color: var(--second-color)!important;
+}
+.sidenav{
+    
+}
+.sidenav li a{
+    
+}
+.sidenav-icons{
+    color:var(--second-color)!important;
+}
+
+@media only screen and (max-width : 992px) {
+	header, main, footer {
+		padding-left: 0;
+	}
+}
+
+.profile_picture img{
+    width: 100px;
+    height: 100px;
+}
+
+.profile_picture{
+    
+    text-align: center;
+}
+
+.profile_picture img{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+.brand-logo span{
+    margin-left: 5px;
+    font-size: 30px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    font-family: 'Courier New', Courier, monospace;
+}
+.dropdown-trigger img{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+.dropdown-trigger2 img{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+.my-color{
+    color:rgba(239, 54, 54, 0.9)!important;
+  }
+
+main{
+
+    width: 97vw !important;
+    margin:0 auto;
+}
+
+/*table design for students*/
+.allsudents table tr:hover{
+    background-color: #e9e7ea;
+}
+.allsudents img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.allsudents table thead tr{
+    background-color: var(--second-color);
+    color: #fff;
+    text-transform: capitalize;
+}
+
+/*LIVE COURSE TABLE*/
+.course-card .s6{
+    border-bottom:1px solid #e3e3e3;
+    padding: 10px;
+}
+.course-card .s6 a{
+    color: coral;
+}
+.coonections i{
+    background-color: #d4d1d6;
+    padding: 20px;
+    border-radius: 50px;
+}
+.coonections-link{
+    color: #083645!important;
+}
+.file-load{
+    
+    height: 80px;
+    width: 80px;
+    margin: 0 auto;
+}
+
+.file-load .large{
+    
+    color: #e3e3e3;
+}
+/*profile page*/
+.profile-page .card-image img{
+    width: 100%;
+    height: 300px;
+}
+
+.profile-info-card span{
+
+}
+/*Admin home styling*/
+.admin-home .sidenav-icons{
+    transform: translateY(5px);
+    color: red;
+}
+.admin-home .sidenav-icons-uncompleted{
+    color: red!important;
+}
+
+
+/* css styling for chart*/
+
+/*style for registration page*/
+
+.welcome img{
+    width: 100%;
+    height: 65vh;
+}
+.regcover{
+    margin-top: 50px;
+}

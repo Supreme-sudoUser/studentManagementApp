@@ -1,0 +1,38 @@
+{% extends 'admin_template/adminbase.html' %}
+{% load materializecss%}
+{% load static %}
+{% block title %}Add student{% endblock %}
+
+{% block content %}
+<style>
+ .image img{
+    width: 100%;
+    height: 300px;
+ }
+</style>
+<main class="">
+    
+    <br><br><br>
+    
+    
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 image">
+                <img src="{% static 'img/1.png' %}" alt="">
+            </div>
+            <div class="col s12 m7">
+                <h5>- Add student - </h5>
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    {{form|materializecss}}
+                    
+                    <br><br>
+                    <button class="btn waves-effect waves-light" type="submit" name="action">
+                        <i class="material-icons right">send</i>
+                        </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+{%endblock%}

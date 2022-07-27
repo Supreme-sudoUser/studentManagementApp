@@ -1,0 +1,57 @@
+{% extends 'admin_template/adminbase.html' %}
+{% load materializecss%}
+{% load static %}
+{% block title %}Add course{% endblock %}
+{% block content %}
+<style>
+  .del{
+      margin-top: 150px;
+  }
+  .del p{
+      padding: 20px;
+      font-size: 25px;
+      color:seagreen;
+  }
+  form{
+     
+  }
+  .del button{
+      background-color: red;
+      color: #fff;
+      width: 100px;
+      outline: none;
+      padding: 5px;
+      border: none;
+  }
+  .del span{
+      border-bottom: 2px solid red;
+  }
+ .del a{
+     margin-top: 10px;
+      background-color: teal;
+      padding: 7px;
+      color: #fff;
+  }
+</style>
+<main class="">
+    
+    <div class="container del">
+        <p>Are you sure you want to delete the course <span>{{form.name}}</span>?</p>
+        <div class="row">
+            <div class="col s12 m5">
+                <form action="" method="POST">
+                    {% csrf_token%}
+    
+                    {{form}}
+                    <button type="submit">Yes, Delete </button> <br>
+                    
+                </form>
+                <br>
+                <hr>
+                <a href="{% url 'parachapp:create_course' %}">No, go back </a>
+            </div>
+        </div>
+    </div>
+</main>
+
+{% endblock content %}

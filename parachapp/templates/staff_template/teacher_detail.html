@@ -1,0 +1,138 @@
+{% extends 'admin_template/adminbase.html' %}
+{% load materializecss%}
+{% load static %}
+
+{% block content %}
+<style>
+  .collapsible-header:focus{
+    background-color:#009688;
+    color: #fff;
+  }
+  .collapsible-header:focus i{
+    background-color:#009688;
+    color: #fff;
+  }
+  .collapsible i{
+    font-size: 15px;
+    color: #918a8a;
+
+  }
+</style>
+<main class="">
+    <section class="profile-page">
+        <div class="row">
+           <div class="col s12 m12">
+             >> student
+           </div>
+         </div>
+         <div class="row">
+          <div class="col s12 m4">
+            <div class="card">
+              <div class="card-image">
+                <img src="{{teacher.profile_pic.url}}">
+                <span class="card-title">{{teacher.firstname}}</span>
+                <a class="btn-floating halfway-fab waves-effect waves-light teal" href="{% url 'parachapp:teacher_updates' teacher.pk %}"><i class="large material-icons">edit</i></a>
+                
+              </div>
+    
+              <div class="card-content">
+                <ul class="collapsible">
+                  <li>
+                    <div class="collapsible-header"><i class="far fa-user"></i>Full name</div>
+                    <div class="collapsible-body"><span>{{teacher.lastname}} {{teacher.firstname}}</span></div>
+                  </li>
+                  <li>
+                    <div class="collapsible-header"><i class="far fa-phone"></i>Phone</div>
+                    <div class="collapsible-body"><span>{{teacher.mobile_phone}}</span></div>
+                  </li>
+                  <li>
+                    <div class="collapsible-header"><i class="far fa-envelope"></i>Email</div>
+                    <div class="collapsible-body"><span>{{teacher.email}}</span></div>
+                  </li>
+                  <li>
+                    <div class="collapsible-header"><i class="far fa-map-marker-alt"></i>Address</div>
+                    <div class="collapsible-body"><span>{{teacher.address}}</span></div>
+                  </li>
+              </ul>
+              </div>
+            </div>
+            
+          </div>
+          
+         <div class="col s12 m8">
+          <div class="row">
+            <div class="paymentcards">
+              {%if teacher.amountpaid == teacher.course %}
+                <div class="col s6 m6">
+                  <div class="card horizontal">
+                    <div class="card-stacked">
+                      <div class="card-content">
+                        <h6>#</h6>
+                      </div>
+                      <div class="card-action">
+                        <i class="material-icons profile-icon">check_circle</i><span>Fully paid </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {% else %}
+
+              
+              <div class="col s6 m3">
+              <div class="card horizontal">
+                <div class="card-stacked">
+                  <div class="card-content">
+                    <h6>#</h6>
+                  </div>
+                  <div class="card-action">
+                    <span>Paid</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col s6 m3">
+              <div class="card horizontal">
+                <div class="card-stacked">
+                  <div class="card-content">
+                    <h6>#</h6>
+                  </div>
+                  <div class="card-action">
+                    <span>Balance</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% endif %}
+            </div>
+            
+            <div class="col s6 m6">
+              <div class="card horizontal">
+                <div class="card-stacked">
+                  
+                  <div class="card-action profile-info-card">
+                    Course:
+                    <span>{{student.course.name}}</span>
+                  </div>
+                  <div class="card-action">
+                    Duration:<span> {{student.session.session_start}} to {{student.session.session_end}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          {{salaryinstance}}
+          <h6 style="border-bottom: 2px solid #009688; padding: 3px;  width: 200px;">pay salary here</h6>
+          <form action="" method="POST" id="attendance_form">
+            {% csrf_token %}
+
+            {{ form|materializecss }}
+
+            <button class="btn waves-effect waves-light" type="submit" name="action">
+              <i class="material-icons right">send</i>
+            </button>
+          </form>
+          
+ </main>
+ 
+{% endblock %}

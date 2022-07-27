@@ -1,0 +1,165 @@
+{% extends 'admin_template/adminbase.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+  .card-content i{
+    color: #009688;
+  }
+</style>
+<main class="">
+    <section class="admin-home">
+      <div class="row">
+        <div class="col s12 m12">
+          >> manager
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s6 m3">
+          <div class="card horizontal">
+             <a href="{% url 'parachapp:student_home' %}" style="color: #000;">
+              <div class="card-stacked">
+                <div class="card-content">
+                  <h5><i class="fas fa-user-friends"></i> {{student_count}}</h5>
+                </div>
+                <div class="card-action">
+                  <span>Number of students</span>
+                </div>
+              </div>
+             </a>
+           </div>
+        </div>
+        <div class="col s6 m3">
+          <div class="card horizontal">
+             <a href="{% url 'parachapp:teacher_home' %}" style="color: #000;">
+              <div class="card-stacked">
+                <div class="card-content">
+                  <h5><i class="fas fa-user-graduate"></i> {{teacher_count}}</h5>
+                </div>
+                <div class="card-action">
+                  <span>Number of Instructors</span>
+                </div>
+              </div>
+             </a>
+           </div>
+        </div>
+        <div class="col s6 m3">
+          <div class="card horizontal">
+             <a href="" style="color: #000;">
+              <div class="card-stacked">
+                <div class="card-content">
+                  <h5><i class="fas fa-check-circle"></i> {{completed_payments}}</h5>
+                </div>
+                <div class="card-action">
+                  <span>Completed payments</span>
+                </div>
+              </div>
+             </a>
+           </div>
+        </div>
+        <div class="col s6 m3">
+          <div class="card horizontal">
+            <a href="{% url 'parachapp:payment_stat' %}" style="color: #000;">
+              <div class="card-stacked">
+                <div class="card-content">
+                  <h5><i class="far fa-times-circle"></i> {{pending_payments}}</h5>
+                </div>
+                <div class="card-action">
+                  <span>Uncompleted payments</span>
+                </div>
+              </div>
+             </a>
+           </div>
+        </div>
+ 
+      </div>
+   </section>
+   <div class="">
+   <div class="row">
+     <div class="col s12 m6">
+        <div id="basic-area" class="card-panel">
+          <canvas id="myChart" width="400" height="400"></canvas>
+        </div>
+     </div>
+     <div class="col s12 m6">
+      <div id="basic-area" class="card-panel">
+        <canvas id="myChart2" width="400" height="400"></canvas>
+      </div>
+   </div>
+   </div>
+ </div>
+ <h1>{{course_check}}</h1>
+ </main>
+ <script>
+  var ctx = document.getElementById('myChart').getContext('2d');
+  var myChart = new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+          labels: ['Completed payments', 'Not completed', 'Not paid'],
+          datasets: [{
+              label: '# of students',
+              data: [{{completed_payments}}, {{pending_payments}}],
+              backgroundColor: [
+                  'rgba(255, 99, 132, 1)',
+                  'rgba(54, 162, 235, 1)',
+                  'rgba(255, 206, 86, 1)',
+                  'rgba(75, 192, 192, 1)',
+                  'rgba(153, 102, 255, 1)',
+                  'rgba(255, 159, 64, 1)'
+              ],
+              borderColor: [
+                  'rgba(255, 99, 132, 1)',
+                  'rgba(54, 162, 235, 1)',
+                  'rgba(255, 206, 86, 1)',
+                  'rgba(75, 192, 192, 1)',
+                  'rgba(153, 102, 255, 1)',
+                  'rgba(255, 159, 64, 1)'
+              ],
+              borderWidth: 1
+          }]
+      },
+      options: {
+          scales: {
+              y: {
+                  beginAtZero: true
+              }
+          }
+      }
+  });
+  var ctx = document.getElementById('myChart2').getContext('2d');
+  var myChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+          labels: [{% for courses in course %} '{{courses}}', {% endfor %}],
+          datasets: [{
+              label: '',
+              data: [{% for courses in course %} '{{courses.price}}', {% endfor %}],
+              backgroundColor: [
+                  'rgba(255, 99, 132, 1)',
+                  'rgba(54, 162, 235, 1)',
+                  'rgba(255, 206, 86, 1)',
+                  'rgba(75, 192, 192, 1)',
+                  'rgba(153, 102, 255, 1)',
+                  'rgba(255, 159, 64, 1)'
+              ],
+              borderColor: [
+                  'rgba(255, 99, 132, 1)',
+                  'rgba(54, 162, 235, 1)',
+                  'rgba(255, 206, 86, 1)',
+                  'rgba(75, 192, 192, 1)',
+                  'rgba(153, 102, 255, 1)',
+                  'rgba(255, 159, 64, 1)'
+              ],
+              borderWidth: 1
+          }]
+      },
+      options: {
+          scales: {
+              y: {
+                  beginAtZero: true
+              }
+          }
+      }
+  });
+  </script>
+{% endblock %}

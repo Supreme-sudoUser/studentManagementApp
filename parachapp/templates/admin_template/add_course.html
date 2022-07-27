@@ -1,0 +1,66 @@
+{% extends 'admin_template/adminbase.html' %}
+{% load materializecss%}
+{% load static %}
+{% block title %}Add course{% endblock %}
+{% block content %}
+<style>
+  
+</style>
+<main class="">
+    <h3>Add course</h3>
+    <div class="row">
+        <div class="col s12 m5">
+            <form action="" method="POST">
+                {% csrf_token%}
+
+                {{form|materializecss}}
+                <button type="submit" class="waves-effect waves-light btn">Add</button>
+            </form>
+        </div>
+        <div class="col s12 m7">
+        {% for message in messages %}
+        {% if message %}
+         <div class="card horizontal">
+            <div class="card-stacked">
+              <div class="card-content">
+                
+                        {{ message }}
+              </div>
+            </div>
+          </div>
+          {% endif %}
+        {%endfor%}
+          <table>
+            <thead>
+                <tr>
+                    <th>Course Name</th>
+                    <th>Price</th>
+                    <th>Date created</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            {% for courses in course %}
+
+                {% if courses.name == 'No course selected' %}
+                        
+                {%else%}
+                <tbody>
+                    <tr>
+                        <td>{{courses.name}}</td>
+                        <td>{{courses.price}}</td>
+                        <td>{{courses.added_on}}</td>
+                        <td><a href="{% url 'parachapp:update_course' courses.pk%}"><i class="material-icons sidenav-icons">edit</i></a></td>
+                        <td><a href="{% url 'parachapp:delete_course' courses.pk%}"><i class="material-icons sidenav-icons" style="color: red !important;">delete_forever</i></a></td>
+                    </tr>
+                </tbody>
+                {%endif%}
+            
+            {%endfor%}
+        </table>
+        </div>
+       
+    </div>
+</main>
+
+{% endblock content %}

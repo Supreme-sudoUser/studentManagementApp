@@ -1,0 +1,55 @@
+{% extends 'admin_template/adminbase.html' %}
+{% load static %}
+{% load materializecss%}
+
+{% block content %}
+
+
+
+<main class="">
+    {% for files in allfiles %}
+        {{files.title}} <br>
+        
+        <a class="{{files.css_class}}" href="{{files.adminupload.url}}" download="{{files.adminupload.url}}">downloadfile</a> <hr>
+    {% endfor %}
+
+    <section class="files">
+        <div class="row">
+            <div class="col m4 s12">
+                <form action="" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                        {{uploadfileform}}
+                        <input type="submit" value = "Upload"/>
+                    
+                </form>
+            </div>
+            <div class="col m8 s12">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Tutor's name</th>
+                            <th>course name</th>
+                            <th>Title of file</th>
+                            <th>Date uploaded</th>
+                            <th>Download files</th>
+                        </tr>
+                    </thead>
+                    {% for files in uploadfile %}
+                    <tbody>
+                        <tr>
+                            <td>{{files.teacherinstance.firstname}}</td>
+                            <td>{{files.course.name}}</td>
+                            <td>{{files.file_title}}</td>
+                            <td>{{files.uploaded_at}}</td>
+                            <td><a class="" href="{{files.files.filesURL}}" download="{{files.files.filesURL}}">downloadfile</a></td>
+                        </tr>
+                    </tbody>
+                    {%endfor%}
+                </table>
+            </div>
+        </div>
+    </section>
+<main>
+
+{% endblock content %}
+    
